@@ -83,7 +83,7 @@ async function main() {
         await form.waitFor({ state: "visible", timeout: 10000 });
 
         const name = `${CONFIG.namePrefix} ${i}`;
-        const comment = `kata pembuatnya suruh test, jangan marah ${i}`;
+        const comment = `dia yang nyuruh`;
 
         const nameInput = form.locator('input[placeholder="John Doe"]');
         const commentInput = form.locator(
