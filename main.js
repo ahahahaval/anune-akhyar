@@ -5,16 +5,19 @@ const { chromium } = require("playwright");
 const CONFIG = {
   url: "https://habkhyar.vercel.app/blog/membedah-gradient-descent",
 
-  // Batasi jumlah percobaan untuk pengujian
-  maxAttempts: 10000,
+  // Batasi jumlah percobaan untuk pengujian (default atau dari env)
+  maxAttempts: process.env.MAX_ATTEMPTS ? parseInt(process.env.MAX_ATTEMPTS, 1000) : 10000,
 
   // Jeda antar-submisi dalam milidetik
   delayBetweenAttempts: 2000,
 
-  namePrefix: "Ahahaha",
+  namePrefix: "Ahahaha ahahahahahahaha ukhukk uhukk",
 
   // Jika sertifikat HTTPS localhost tidak dipercaya
   ignoreHTTPSErrors: true,
+
+  // Otomatis headless jika di server / CI atau disetel via ENV
+  headless: process.env.HEADLESS === "true" || !!process.env.CI,
 };
 
 function sleep(ms) {
@@ -23,7 +26,7 @@ function sleep(ms) {
 
 async function main() {
   const browser = await chromium.launch({
-    headless: true,
+    headless: CONFIG.headless,
   });
 
   const context = await browser.newContext({
@@ -83,7 +86,7 @@ async function main() {
         await form.waitFor({ state: "visible", timeout: 10000 });
 
         const name = `${CONFIG.namePrefix} ${i}`;
-        const comment = `dia yang nyuruh`;
+        const comment = `suruh dia`;
 
         const nameInput = form.locator('input[placeholder="John Doe"]');
         const commentInput = form.locator(
