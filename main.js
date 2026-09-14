@@ -6,7 +6,7 @@ const CONFIG = {
   url: "https://habkhyar.vercel.app/blog/membedah-gradient-descent",
 
   // Batasi jumlah percobaan untuk pengujian (default atau dari env)
- maxAttempts: process.env.MAX_ATTEMPTS ? parseInt(process.env.MAX_ATTEMPTS, 1000) : 1000,
+ maxAttempts: 1000,
 
 
   // Jeda antar-submisi dalam milidetik
